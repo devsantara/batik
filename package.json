@@ -7,8 +7,16 @@
     "design system",
     "stylex"
   ],
+  "homepage": "https://github.com/devsantara/batik#readme",
+  "bugs": {
+    "url": "https://github.com/devsantara/batik/issues"
+  },
   "license": "MIT",
   "author": "devsantara",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devsantara/batik.git"
+  },
   "type": "module",
   "scripts": {
     "prepare": "vp config",
