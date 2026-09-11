@@ -1,0 +1,68 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    ':semanticCommits',
+    ':semanticCommitScope(deps)',
+    ':dependencyDashboard',
+    'group:monorepos',
+    'group:recommended',
+    'replacements:all',
+    'workarounds:all',
+  ],
+
+  timezone: 'Asia/Jakarta',
+  schedule: ['before 9am on monday'],
+  labels: ['dependencies'],
+
+  // Commitlint requires `type(scope): subject`, lowercase, at most 72
+  // characters. Dropping Renovate's default "dependency " prefix from the topic
+  // keeps titles inside that budget for most packages; grouping does the rest.
+  commitMessageTopic: '{{depName}}',
+
+  // Wait out fresh releases before touching them. This has to stay at or above
+  // `minimumReleaseAge` in pnpm-workspace.yaml, or Renovate will open pull
+  // requests that `vp install` then refuses to resolve.
+  minimumReleaseAge: '3 days',
+  internalChecksFilter: 'strict',
+
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: ['before 9am on the first day of the month'],
+  },
+
+  osvVulnerabilityAlerts: true,
+  vulnerabilityAlerts: {
+    // Known vulnerabilities do not wait.
+    minimumReleaseAge: null,
+    schedule: ['at any time'],
+    labels: ['dependencies', 'security'],
+  },
+
+  packageRules: [
+    {
+      // vite-plus, the vite alias and the platform binaries are one release
+      // train. Splitting them across pull requests produces a workspace that
+      // does not install.
+      matchPackageNames: ['vite-plus', 'vite', 'vitest', '@voidzero-dev/**', '@vitest/**'],
+      groupName: 'vite+ toolchain',
+    },
+    {
+      matchPackageNames: ['@commitlint/**'],
+      groupName: 'commitlint',
+    },
+    {
+      matchPackageNames: ['@changesets/**'],
+      groupName: 'changesets',
+    },
+    {
+      matchManagers: ['github-actions'],
+      groupName: 'github actions',
+    },
+    {
+      // Majors land on their own so the changelog gets read.
+      matchUpdateTypes: ['major'],
+      dependencyDashboardApproval: true,
+    },
+  ],
+}
