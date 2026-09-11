@@ -38,11 +38,6 @@ We ask that you give us a reasonable window to ship a fix before disclosing
 publicly. We will not take legal action against anyone who reports in good faith
 and follows this policy.
 
-## Supported versions
-
-Batik is pre-1.0. Only the latest published version of each package receives
-security fixes. Older versions are not patched — please upgrade.
-
 ## How releases are secured
 
 - Packages publish from GitHub Actions with
