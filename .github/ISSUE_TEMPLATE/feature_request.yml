@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest a component, token, or API for Batik
+description: Suggest a new feature or an improvement to Batik
 labels: ['enhancement', 'triage']
 body:
   - type: markdown
@@ -13,8 +13,11 @@ body:
     id: preflight
     attributes:
       label: Before you start
+      description: By submitting this issue, you agree to follow our [Contributing Guidelines](https://github.com/devsantara/batik/blob/main/CONTRIBUTING.md).
       options:
-        - label: I searched the existing issues and this has not been proposed yet.
+        - label: I read the documentation and this is not already possible.
+          required: true
+        - label: I searched the existing issues or PRs and this has not been proposed yet.
           required: true
 
   - type: textarea
