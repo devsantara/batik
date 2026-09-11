@@ -1,0 +1,20 @@
+{
+  // vite+ for npm scripts
+  "npm.scriptRunner": "vp",
+
+  // disable other formatters/linters
+  "prettier.enable": false,
+  "eslint.enable": false,
+  "biome.enabled": false,
+
+  // oxc
+  "oxc.enable": true,
+
+  // editor
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  }
+}
