@@ -10,7 +10,7 @@ export default defineConfig({
     passWithNoTests: true,
   },
   fmt: {
-    ignorePatterns: ['pnpm-lock.yaml'],
+    ignorePatterns: ['pnpm-lock.yaml', '.changeset/**'],
     semi: true,
     useTabs: false,
     tabWidth: 2,
