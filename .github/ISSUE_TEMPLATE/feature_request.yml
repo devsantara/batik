@@ -1,0 +1,58 @@
+name: Feature request
+description: Suggest a new feature or an improvement to Batik
+labels: ['enhancement', 'triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Batik is a design system, so additions carry a long support tail. Tell
+        us about the problem first — it often has a cheaper solution than the
+        one that brought you here.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you start
+      description: By submitting this issue, you agree to follow our [Contributing Guidelines](https://github.com/devsantara/batik/blob/main/CONTRIBUTING.md).
+      options:
+        - label: I read the documentation and this is not already possible.
+          required: true
+        - label: I searched the existing issues or PRs and this has not been proposed yet.
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: >-
+        What are you trying to build, and where does Batik get in the way today?
+      placeholder: >-
+        I need a dense table row, and the spacing tokens only go down to `md`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: What you would like
+      description: The API, token, or component you have in mind. Sketch it out.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you tried instead
+      description: >-
+        Workarounds you have already used, and why they are not good enough.
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else
+      description: >-
+        Prior art from other design systems, links, screenshots.
+    validations:
+      required: false

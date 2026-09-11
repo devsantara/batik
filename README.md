@@ -9,3 +9,22 @@
   <a href="./LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/devsantara/batik?style=for-the-badge&labelColor=000000"></a>
   <a href="https://github.com/devsantara/batik/graphs/contributors"><img alt="contributors" src="https://img.shields.io/github/contributors/devsantara/batik?style=for-the-badge&labelColor=000000"></a>
 </div>
+
+> [!WARNING]
+> Batik is in early development and not ready for production use. Nothing is
+> published to npm yet, and the API is not stable. Breaking changes can land
+> in any release before 1.0.
+
+## Contributing
+
+Bug reports, ideas and pull requests are welcome.
+[CONTRIBUTING.md](./CONTRIBUTING.md) covers the setup, the commands, the commit
+convention and how changesets work here. Everyone taking part is expected to
+follow the [Code of Conduct](./CODE_OF_CONDUCT.md).
+
+Found a security problem? Do not open an issue —
+[SECURITY.md](./SECURITY.md) explains how to report it privately.
+
+## License
+
+[MIT](./LICENSE) © [Devsantara](https://github.com/devsantara)

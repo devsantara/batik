@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or half-formed idea
+    url: https://github.com/devsantara/batik/discussions
+    about: Ask how to use Batik, or float an idea before it becomes a proposal.
+  - name: Security vulnerability
+    url: https://github.com/devsantara/batik/security/advisories/new
+    about: Report privately. Please do not open a public issue for this.

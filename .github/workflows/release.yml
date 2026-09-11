@@ -77,7 +77,7 @@ jobs:
         with:
           cache: false # avoid cache poisoning in release jobs
       - name: Build packages
-        run: vp run build
+        run: vp run -r pack
       - name: Pack packages
         id: pack
         uses: changesets/action/pack@v2.1.2
