@@ -141,7 +141,7 @@ This is a pnpm workspace:
 | `packages/*`  | Published libraries                                |
 | `apps/*`      | Documentation, playgrounds, and other private apps |
 | `.changeset/` | Pending release notes                              |
-| `.github/`    | CI workflows, issue and pull request templates     |
+| `.github/`    | CI workflows and issue templates                   |
 
 ### Commands
 
@@ -280,8 +280,8 @@ changeset.
    `main`.
 2. Give it a title that passes commitlint (see
    [Commit messages](#commit-messages)).
-3. Fill in the pull request template. Explain what changes and why, and
-   link the issue it resolves with `Closes #123`.
+3. In the description, explain what changes and why, and link the issue it
+   resolves with `Closes #123`.
 4. Call out breaking changes explicitly, along with what consumers need to do.
 5. Tick **Allow edits from maintainers**, so we can push small fixes without a
    round trip.
