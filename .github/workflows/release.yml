@@ -77,7 +77,10 @@ jobs:
         with:
           cache: false # avoid cache poisoning in release jobs
       - name: Build packages
-        run: vp run build
+        # `-r` rather than the root `build` script: the script's own
+        # nested `vp run -r build` cannot plan a workspace that has no
+        # package defining `build` yet.
+        run: vp run -r build
       - name: Pack packages
         id: pack
         uses: changesets/action/pack@v2.1.2

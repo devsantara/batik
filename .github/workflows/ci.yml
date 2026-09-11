@@ -66,7 +66,10 @@ jobs:
         with:
           cache: true
       - name: Build packages
-        run: vp run build
+        # `-r` rather than the root `build` script: the script's own
+        # nested `vp run -r build` cannot plan a workspace that has no
+        # package defining `build` yet.
+        run: vp run -r build
 
   commit:
     name: Commit message
