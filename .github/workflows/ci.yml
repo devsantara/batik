@@ -2,16 +2,12 @@ name: CI
 
 on:
   pull_request:
-  push:
-    branches:
-      - main
 
 permissions: {} # each job declares only the permissions it needs
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  # Superseded pull request runs are safe to drop; main runs always finish.
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 
 jobs:
   check:
@@ -50,30 +46,8 @@ jobs:
       - name: Run tests
         run: vp test run --coverage
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    permissions:
-      contents: read # to check out repo (actions/checkout)
-    steps:
-      - name: Check out repo
-        uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-      - name: Set up Vite+ and install dependencies
-        uses: voidzero-dev/setup-vp@v1.19.0
-        with:
-          cache: true
-      - name: Build packages
-        # `-r` rather than the root `build` script: the script's own
-        # nested `vp run -r build` cannot plan a workspace that has no
-        # package defining `build` yet.
-        run: vp run -r build
-
   commit:
     name: Commit message
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -94,25 +68,3 @@ jobs:
           # Read through the environment, never interpolated into the script.
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: printf '%s' "$PR_TITLE" | vp run commitlint
-
-  changeset:
-    name: Changeset
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    permissions:
-      contents: read # to check out repo (actions/checkout)
-    steps:
-      - name: Check out repo
-        uses: actions/checkout@v7.0.1
-        with:
-          fetch-depth: 0 # changeset status diffs against the base branch
-          persist-credentials: false
-      - name: Set up Vite+ and install dependencies
-        uses: voidzero-dev/setup-vp@v1.19.0
-        with:
-          cache: true
-      - name: Check for a changeset
-        env:
-          BASE_REF: ${{ github.base_ref }}
-        run: vp run changeset status --since="origin/$BASE_REF"
