@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions: {} # each job declares only the permissions it needs
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Superseded pull request runs are safe to drop; main runs always finish.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read # to check out repo (actions/checkout)
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Vite+ and install dependencies
+        uses: voidzero-dev/setup-vp@v1.19.0
+        with:
+          cache: true
+      - name: Format, lint and type check
+        run: vp check
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read # to check out repo (actions/checkout)
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Vite+ and install dependencies
+        uses: voidzero-dev/setup-vp@v1.19.0
+        with:
+          cache: true
+      - name: Run tests
+        run: vp test run --coverage
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read # to check out repo (actions/checkout)
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Vite+ and install dependencies
+        uses: voidzero-dev/setup-vp@v1.19.0
+        with:
+          cache: true
+      - name: Build packages
+        run: vp run build
+
+  commit:
+    name: Commit message
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read # to check out repo (actions/checkout)
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Vite+ and install dependencies
+        uses: voidzero-dev/setup-vp@v1.19.0
+        with:
+          cache: true
+      - name: Lint pull request title
+        env:
+          # Pull requests are squash merged, so the title becomes the commit
+          # subject on main and has to satisfy the same commitlint rules.
+          # Read through the environment, never interpolated into the script.
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: printf '%s' "$PR_TITLE" | vp run commitlint
+
+  changeset:
+    name: Changeset
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read # to check out repo (actions/checkout)
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0 # changeset status diffs against the base branch
+          persist-credentials: false
+      - name: Set up Vite+ and install dependencies
+        uses: voidzero-dev/setup-vp@v1.19.0
+        with:
+          cache: true
+      - name: Check for a changeset
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: vp run changeset status --since="origin/$BASE_REF"
