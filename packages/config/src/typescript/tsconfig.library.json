@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    // noEmit (inherited) still holds; tsdown reads these flags to decide what to generate.
     "declaration": true,
     "declarationMap": true
   }

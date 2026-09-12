@@ -1,11 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    // lib/types are left to environment configs so browser/Node globals aren't mixed.
     "target": "ES2022",
     "moduleDetection": "force",
-    // No baseUrl/paths: tsgolint (behind `vp check`) doesn't support baseUrl.
-    // Use package.json `imports` (`#/...`) for internal aliases.
     "module": "preserve",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -13,7 +10,6 @@
     "isolatedModules": true,
     "erasableSyntaxOnly": true,
     "noUncheckedSideEffectImports": true,
-    // tsdown/Vite own emitted artifacts; tsc only type-checks.
     "noEmit": true,
     "incremental": true,
     "tsBuildInfoFile": "${configDir}/node_modules/.cache/tsconfig.tsbuildinfo",
