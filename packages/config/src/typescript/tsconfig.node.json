@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    // Pinned to Node 24 (root package.json devEngines), which supports ES2024.
+    "target": "ES2024",
+    "lib": ["ES2024"],
+    "types": ["node"]
+  }
+}

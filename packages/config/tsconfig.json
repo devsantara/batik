@@ -1,0 +1,8 @@
+{
+  "extends": "./src/typescript/tsconfig.node.json",
+  "compilerOptions": {
+    // vite.config.ts is loaded as raw TS by a loader with literal specifier
+    // resolution, so relative imports must name the .ts extension.
+    "allowImportingTsExtensions": true
+  }
+}
