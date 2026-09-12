@@ -1,0 +1,6 @@
+{
+  "extends": "./src/typescript/tsconfig.node.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true
+  }
+}

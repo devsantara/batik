@@ -1,0 +1,40 @@
+{
+  "name": "@batik/config",
+  "version": "0.0.0",
+  "description": "Shared tooling configuration for Batik",
+  "keywords": [
+    "batik",
+    "config"
+  ],
+  "homepage": "https://github.com/devsantara/batik/tree/main/packages/config#readme",
+  "bugs": {
+    "url": "https://github.com/devsantara/batik/issues"
+  },
+  "license": "MIT",
+  "author": "devsantara",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devsantara/batik.git",
+    "directory": "packages/config"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "exports": {
+    "./typescript/tsconfig.base.json": "./src/typescript/tsconfig.base.json",
+    "./typescript/tsconfig.browser.json": "./src/typescript/tsconfig.browser.json",
+    "./typescript/tsconfig.library.json": "./src/typescript/tsconfig.library.json",
+    "./typescript/tsconfig.node.json": "./src/typescript/tsconfig.node.json",
+    "./typescript/tsconfig.react.json": "./src/typescript/tsconfig.react.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.8"
+  }
+}

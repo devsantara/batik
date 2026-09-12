@@ -76,8 +76,6 @@ jobs:
         uses: voidzero-dev/setup-vp@v1.19.0
         with:
           cache: false # avoid cache poisoning in release jobs
-      - name: Build packages
-        run: vp run -r pack
       - name: Pack packages
         id: pack
         uses: changesets/action/pack@v2.1.2
